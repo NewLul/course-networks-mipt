@@ -1,26 +1,15 @@
-# Задание 1
+# TCP Protocol
 
-Реализовать консистентный протокол, имитирующий TCP и работающий поверх UDP.
+Implementation of a consistent TCP protocol over UDP.
 
-Для решения задачи необходимо изменить класс `MyTCPProtocol` в файле `protocol.py`.
+The protocol is implemented in class `MyTCPProtocol` in `protocol.py`.
 
-Для проверки решения следует запустить ко `test.sh`. Все необходимые Python зависимости можно найти в файле `requirements.txt`
+To test the protocol, run the `test.sh` script. All Python dependencies can be found in `requirements.txt` file.
 
-## Запуск при помощи docker
-> При использовании Docker for Windows и WSL симулируемые ограничения на сеть могут не работать. В этом случае даже наивное решение будет проходить большинство тестов. Решение проблемы [тут](https://github.com/imunes/imunes/issues/111).
+## Running with Docker
 ```
 docker compose up --build
 ```
 
-## Локальный запуск
-Работает только на Linux, для подробностей см. [HOWTO.md](HOWTO.md)
-
-## Оценивание
-
-За задание можно получить до 3 баллов. Оценка складывается из тестов, пройденных решением:
-
-* `test_small_*` - 0.5 балла
-* `test_high_*` - 0.5 балла
-* `test_large_message` - 0.5 балла
-* `test_parallel` - 0.5 балла
-* `test_perfomance` - 1 балл, засчитывается только при прохождении всех остальных тестов.
+## Local Running
+Run `test.sh` under root privileges.

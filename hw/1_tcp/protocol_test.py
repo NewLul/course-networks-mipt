@@ -21,11 +21,12 @@ def generate_port():
 
 
 def run_test(client_class, server_class, iterations, msg_size=None):
-    a_addr = ('127.0.0.1', generate_port())
-    b_addr = ('127.0.0.1', generate_port())
+    a_addr = ("127.0.0.1", generate_port())
+    b_addr = ("127.0.0.1", generate_port())
 
-    with closing(MyTCPProtocol(local_addr=a_addr, remote_addr=b_addr)) as a, \
-         closing(MyTCPProtocol(local_addr=b_addr, remote_addr=a_addr)) as b:
+    with closing(MyTCPProtocol(local_addr=a_addr, remote_addr=b_addr)) as a, closing(
+        MyTCPProtocol(local_addr=b_addr, remote_addr=a_addr)
+    ) as b:
 
         client = client_class(a, iterations=iterations, msg_size=msg_size)
         server = server_class(b, iterations=iterations, msg_size=msg_size)
@@ -63,11 +64,14 @@ def test_basic(iterations):
     setup_netem(packet_loss=0.0, duplicate=0.0, reorder=0.0)
     run_test(EchoClient, EchoServer, iterations=iterations, msg_size=11)
 
+
 @pytest.mark.parametrize("iterations", [10, 100, 500])
 @pytest.mark.timeout(30)
 def test_small_loss(iterations):
     setup_netem(packet_loss=0.02, duplicate=0.0, reorder=0.0)
     run_test(EchoClient, EchoServer, iterations=iterations, msg_size=14)
+
+
 
 @pytest.mark.parametrize("iterations", [10, 100, 500])
 @pytest.mark.timeout(30)
